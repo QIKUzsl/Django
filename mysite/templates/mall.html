@@ -1,0 +1,1906 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>中酒网-项目网站</title>
+	{% load static %}
+
+    <link rel="shortcut icon" type="image/X-icon" href="{% static 'images/public/title_logo.png' %}" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/mall.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/slide.css' %}" />
+	<script type="text/javascript" src="{% static 'js/lib/jquery-1.12.4.min.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'js/lib/countdown.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'js/lib/slide.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'js/lib/style.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'js/lib/jquery.cookie.js' %}" ></script>
+	
+</head>
+<body>
+	<a id="header" href=""></a>
+	
+	<div id="site_nav">
+		<ul id="site_nav_center">
+			<li class="nav_left_home"><a href="{% url 'seller:seller_login' %}">申请店铺</a></li>
+
+            {#登录成功后保存状态#}
+            {% if request.session.loginUsers %}
+                <li class="nav_left" style="color: red">Hi，欢迎{{ request.session.loginUsers.username }}来到中酒</li>
+			{% else %}
+                <li class="nav_left"><a href="{% url 'Users:login' %}" target="_blank">请登录</a></li>
+                <li class="nav_left register"><a href="{% url 'Users:register' %}" target="_blank">注册</a></li>
+			{% endif %}
+            <li class="nav_right weixin">
+				<img src="/static/images/public/weixin.png">
+				<img class="weixin2" src="/static/images/public/weixin2.jpg" /><!--微信二维码 暂时隐藏-->		
+			</li>
+			<li class="nav_right weibo">
+				<img src="/static/images/public/weibo.png">
+				<img class="weibo2" src="/static/images/public/weibo2.png" /><!--微博二维码 暂时隐藏-->
+			</li>
+			<li class="nav_right Notice"><a href="{% url 'Users:logout' %}">【退出登录】</a></li>
+			<li class="nav_right tel">订购热线：<strong class="phoneNumber">400-798-9999</strong></li>
+			<li class="nav_right help"><a href="html/helpCenter.html">帮助中心</a></li>
+			<li class="nav_right mobile"><a href="html/mobileVersion.html">手机版</a></li>
+			<li class="nav_right myzj"><a href="html/userCenter.html" target="_blank">我的中酒</a></li>
+		</ul>
+	</div>
+	
+	<div id="search_area">
+		<h2><a href=""><img src="/static/images/public/logo.jpg"></a></h2>
+		
+		<div id="gif_ad"><a href=""><img src="/static/images/public/0901gif.gif"></a></div>
+		
+		<div id="search_area_input">
+			<form id="search_form" name="" action="">
+				<input class="txt" type="text" value="" placeholder="茅台" />
+				<button class="btn">搜索</button>
+			</form>
+			
+			<ul id="hot_search">
+				<li>热门搜索：</li>
+				<li><a href="">买一赠一</a></li>
+				<li><a href="">新人特权</a></li>
+				<li><a href="">五粮液</a></li>
+				<li><a href="">茅台</a></li>
+				<li><a href="">国台</a></li>
+				<li><a href="">泸州老窖</a></li>
+			</ul>
+		</div>
+		
+		<div id="myShoppingCart_warp">
+			<h2 id="myShoppingCart">
+				<i class="icon_car"></i>
+				<a href="html/myShoppingCart.html">我的购物车</a>
+				<span class="pao">
+					<i class="pr_num">0</i>
+				</span>	
+			</h2>
+		</div>	
+	</div>
+	
+	<ul id="main_nav">
+		<li class="all_goods">全部商品分类</li>
+		<li class="main_nav_li"><a href="">商城</a></li>
+		<li class="main_nav_li"><a href="#flash_sale">闪购</a></li>
+		<li class="main_nav_li"><a href="#whiteSpirit">白酒专场</a></li>
+		<li class="main_nav_li"><a href="#redSpirit">红酒专场</a></li>
+		<li class="main_nav_li"><a href="#yangSpirit">洋酒专场</a></li>
+		<li class="main_nav_li"><a href="#brand_sale">美国优选</a></li>
+		<li class="main_nav_li"><a href="#flash_sale">新品驾到</a></li>
+		<li class="main_nav_li"><a href="#brand_sale">中酒资讯</a></li>
+		<li class="main_nav_li hot_area">
+			<a href="#brand_sale">会员专区</a>
+			<img src="/static/images/public/hot.png">
+			
+			<dl id="center_right">
+				<dt class="notice_title">
+					<p>
+						<i></i>
+						公告
+						<span>&gt;</span>
+						<a>更多</a>
+					</p>
+				</dt>
+				<dd class="notice_list">
+					<ul>
+						<li><a href="" style="color: #B81C22;"><b>[公告]</b>中秋好礼 买一赠一</a></li>
+						<li><a href=""><b>[公告]</b>五粮液永不分离 149元购</a></li>
+						<li><a href=""><b>[公告]</b>五粮液永不分离 149元购</a></li>
+						<li><a href=""><b>[公告]</b>G20峰会期间，发货公告</a></li>
+					</ul>
+				</dd>
+				<dd class="notice_pic">
+					<img src="/static/images/public/gggg2.jpg" />
+				</dd>
+			</dl>
+			
+		</li>
+		
+		<!--banner图上部分定位 相对于nav-->
+		<li id="banner_center">
+			<ul id="center_left">
+				<li class="whiteSpirit">					
+					<a href="#whiteSpirit"><i></i>名优白酒</a>
+							
+					<!--名优白酒 详情显示区-->
+					<div id="all_goods_area" class="whiteSpirit_area">
+						<div id="all_goods_area_left">
+							<dl id="brand">
+								<dt>品牌</dt>
+								<dd>
+									<ul>
+										<li><a href="">茅台</a></li>
+										<li><a href="">五粮液</a></li>
+										<li><a href="">泸州老窖</a></li>
+										<li><a href="">剑南春</a></li>
+										<li><a href="">洋河</a></li>
+										<li><a href="">汾酒</a></li>
+										<li><a href="">天佑德</a></li>
+										<li><a href="">小糊涂仙</a></li>
+										<li><a href="">郎酒</a></li>
+										<li><a href="">杜康</a></li>
+										<li><a href="">古井</a></li>
+										<li><a href="">衡水老白干</a></li>
+										<li><a href="">孔府家</a></li>
+										<li><a href="">西凤</a></li>
+										<li><a href="">国台</a></li>
+										<li><a href="">牛栏山</a></li>
+										<li><a href="">青青稞酒</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>品种</dt>
+								<dd>
+									<ul>
+										<li><a href="">酱香型</a></li>
+										<li><a href="">绵柔型</a></li>
+										<li><a href="">浓香型</a></li>
+										<li><a href="">清香型</a></li>
+										<li><a href="">特香型</a></li>
+										<li><a href="">董香型</a></li>
+										<li><a href="">凤香型</a></li>
+										<li><a href="">青稞酒</a></li>	
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>产地</dt>
+								<dd>
+									<ul>
+										<li><a href="">贵州</a></li>
+										<li><a href="">江西</a></li>
+										<li><a href="">四川</a></li>
+										<li><a href="">江苏</a></li>
+										<li><a href="">山西</a></li>
+										<li><a href="">江苏</a></li>
+										<li><a href="">山西</a></li>
+										<li><a href="">山东</a></li>	
+										<li><a href="">内蒙</a></li>
+										<li><a href="">河南</a></li>
+										<li><a href="">青海</a></li>	
+									</ul>
+								</dd>
+							</dl>	
+						</div><!--<div id="all_goods_area_left">-->
+							
+						<div id="all_goods_area_right">
+							<p class="all_goods_area_right_title">促销活动</p>
+							<p class="all_goods_area_right_img1"><img src="/static/images/public/0822guanggao.jpg"></p>
+							<p class="all_goods_area_right_img2"><img src="/static/images/public/0810guanggao.jpg"></p>
+						</div>
+					</div><!--<div id="all_goods_area" class="whiteSpirit_area">名优白酒-->
+					
+				</li>
+				
+				<li class="wine">					
+					<a href="#redSpirit"><i></i>葡萄酒/红酒</a>
+					
+					<!--葡萄酒/红酒 详情显示区-->
+					<div id="all_goods_area"  class="wine_area">
+						<div id="all_goods_area_left">
+							<dl id="brand">
+								<dt>品牌</dt>
+								<dd>
+									<ul>
+										<li><a href="">拉菲</a></li>
+										<li><a href="">佩西</a></li>
+										<li><a href="">张裕</a></li>
+										<li><a href="">易莎特</a></li>
+										<li><a href="">黄尾袋鼠</a></li>
+										<li><a href="">乐创</a></li>
+										<li><a href="">小龙船</a></li>
+										<li><a href="">圣迪斯</a></li>
+										<li><a href="">澜爵</a></li>
+										<li><a href="">奔富</a></li>
+										<li><a href="">康迪</a></li>
+										<li><a href="">美圣世家</a></li>
+										<li><a href="">中级庄</a></li>
+										<li><a href="">通天</a></li>
+										<li><a href="">马克斯威</a></li>
+										<li><a href="">特拉托</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>品种</dt>
+								<dd>
+									<ul>
+										<li><a href="">干红葡萄酒</a></li>
+										<li><a href="">干白葡萄酒</a></li>
+										<li><a href="">起泡酒/香槟</a></li>
+										<li><a href="">冰酒</a></li>
+										<li><a href="">果酒</a></li>
+										<li><a href="">甜桃红</a></li>
+										<li><a href="">甜白</a></li>	
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>产地</dt>
+								<dd>
+									<ul>
+										<li><a href="">法国</a></li>
+										<li><a href="">西班牙</a></li>
+										<li><a href="">智利</a></li>
+										<li><a href="">阿根廷</a></li>
+										<li><a href="">澳大利亚</a></li>
+										<li><a href="">南非</a></li>
+										<li><a href="">中国</a></li>
+										<li><a href="">美国</a></li>	
+									</ul>
+								</dd>
+							</dl>	
+						</div><!--<div id="all_goods_area_left">-->
+						<div id="all_goods_area_right">
+							<p class="all_goods_area_right_title">促销活动</p>
+							<p class="all_goods_area_right_img1"><img src="/static/images/public/0323lafeiguanggao.jpg"></p>
+							<p class="all_goods_area_right_img2"><img src="/static/images/public/0711hyguanggao.jpg"></p>
+						</div>
+					</div>	
+
+				</li>
+				
+				<li class="foreignWine">					
+					<a href="#yangSpirit"><i></i>洋酒</a>
+					
+					<!--洋酒 详情显示区-->
+					<div id="all_goods_area"  class="foreignWine_area">
+						<div id="all_goods_area_left">
+							<dl id="brand">
+								<dt>品牌</dt>
+								<dd>
+									<ul>
+										<li><a href="">马爹利</a></li>
+										<li><a href="">兄弟</a></li>
+										<li><a href="">人头马</a></li>
+										<li><a href="">芝华士</a></li>
+										<li><a href="">深蓝</a></li>
+										<li><a href="">百利甜</a></li>
+										<li><a href="">绝对伏特加</a></li>
+										<li><a href="">杰克丹尼</a></li>
+										<li><a href="">百龄坛</a></li>
+										<li><a href="">红广场</a></li>
+										<li><a href="">百加得</a></li>
+										<li><a href="">尊尼获加</a></li>
+										<li><a href="">叶卡</a></li>
+										<li><a href="">轩尼诗</a></li>
+										<li><a href="">皇家礼炮</a></li>
+										<li><a href="">摩根船长</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>品种</dt>
+								<dd>
+									<ul>
+										<li><a href="">聚会用酒</a></li>
+										<li><a href="">商务用酒</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>产地</dt>
+								<dd>
+									<ul>
+										<li><a href="">国内</a></li>
+										<li><a href="">法国</a></li>
+										<li><a href="">英国</a></li>
+										<li><a href="">美国</a></li>
+									</ul>
+								</dd>
+							</dl>	
+						</div><!--<div id="all_goods_area_left">-->
+						<div id="all_goods_area_right">
+							<p class="all_goods_area_right_title">促销活动</p>
+							<p class="all_goods_area_right_img1"><img src="/static/images/public/yang3.jpg"></p>
+							<p class="all_goods_area_right_img2"><img src="/static/images/public/yang4.jpg"></p>
+						</div>
+					</div>
+					
+				</li>
+				
+				<li class="yellowRice">					
+					<a href="#otherSpirit"><i></i>黄酒</a>
+					
+					<!--黄酒 详情显示区-->
+					<div id="all_goods_area"  class="yellowRice_area">
+						<div id="all_goods_area_left">
+							<dl id="brand">
+								<dt>品牌</dt>
+								<dd>
+									<ul>
+										<li><a href="">塔牌</a></li>
+										<li><a href="">古越龙山</a></li>
+										<li><a href="">石库门</a></li>
+										<li><a href="">会稽山</a></li>
+										<li><a href="">女儿红</a></li>
+										<li><a href="">唐宋</a></li>
+										<li><a href="">劲酒</a></li>
+										<li><a href="">尧喝货</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>品种</dt>
+								<dd>
+									<ul>
+										<li><a href="">聚会用酒</a></li>
+										<li><a href="">礼节拜访</a></li>
+										<li><a href="">婚庆用酒</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>价格</dt>
+								<dd>
+									<ul>
+										<li><a href="">1-99</a></li>
+										<li><a href="">100-199</a></li>
+										<li><a href="">200-299</a></li>
+									</ul>
+								</dd>
+							</dl>	
+						</div><!--<div id="all_goods_area_left">-->
+						<div id="all_goods_area_right">
+							<p class="all_goods_area_right_title">促销活动</p>
+							<p class="all_goods_area_right_img1"><img src="/static/images/public/huang1.jpg"></p>
+							<p class="all_goods_area_right_img2"><img src="/static/images/public/huang2.jpg"></p>
+						</div>
+					</div>
+					
+				</li>
+				
+				<li class="gift">					
+					<a href="javascript:;"><i></i>礼品专区</a>
+					
+					<!--礼品专区 详情显示区-->
+					<div id="all_goods_area"  class="gift_area">
+						<div id="all_goods_area_left">
+							<dl id="brand">
+								<dt>品牌</dt>
+								<dd>
+									<ul>
+										<li><a href="">国台</a></li>
+										<li><a href="">泸州老窖</a></li>
+										<li><a href="">牧童村 </a></li>
+										<li><a href="">汾酒</a></li>
+										<li><a href="">拉菲</a></li>
+										<li><a href="">张裕</a></li>
+										<li><a href="">小菊屋</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>品种</dt>
+								<dd>
+									<ul>
+										<li><a href="">酱香型</a></li>
+										<li><a href="">清香型</a></li>
+										<li><a href="">干红葡萄酒</a></li>
+										<li><a href="">起泡酒</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>产地</dt>
+								<dd>
+									<ul>
+										<li><a href="">四川</a></li>
+										<li><a href="">贵州</a></li>
+										<li><a href="">陕西</a></li>
+										<li><a href="">法国</a></li>
+									</ul>
+								</dd>
+							</dl>	
+						</div><!--<div id="all_goods_area_left">-->
+						<div id="all_goods_area_right">
+							<p class="all_goods_area_right_title">促销活动</p>
+							<p class="all_goods_area_right_img1"><img src="/static/images/public/0616tydguanggao.jpg"></p>
+							<p class="all_goods_area_right_img2"><img src="/static/images/public/0711dkguanggao.jpg"></p>
+						</div>
+					</div>
+					
+				</li>
+				
+				<li class="wedCelebration">					
+					<a href="javascript:;"><i></i>婚庆专用</a>
+					
+					<!--婚庆专用  详情显示区-->
+					<div id="all_goods_area"  class="wedCelebration_area">
+						<div id="all_goods_area_left">
+							<dl id="brand">
+								<dt>品牌</dt>
+								<dd>
+									<ul>
+										<li><a href="">五粮液</a></li>
+										<li><a href="">茅台</a></li>
+										<li><a href="">牛栏山 </a></li>
+										<li><a href="">剑南春</a></li>
+										<li><a href="">西凤</a></li>
+										<li><a href="">沱牌</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>品种</dt>
+								<dd>
+									<ul>
+										<li><a href="">白酒</a></li>
+										<li><a href="">红酒</a></li>
+									</ul>
+								</dd>
+							</dl>
+							
+							<dl id="brand">
+								<dt>产地</dt>
+								<dd>
+									<ul>									
+										<li><a href="">贵州</a></li>
+										<li><a href="">四川</a></li>
+										<li><a href="">南非</a></li>
+										<li><a href="">法国</a></li>
+										<li><a href="">中国</a></li>
+									</ul>
+								</dd>
+							</dl>	
+						</div><!--<div id="all_goods_area_left">-->
+						<div id="all_goods_area_right">
+							<p class="all_goods_area_right_title">促销活动</p>
+							<p class="all_goods_area_right_img1"><img src="/static/images/public/0704mkswguanggao.jpg"></p>
+							<p class="all_goods_area_right_img2"><img src="/static/images/public/0711bjguangao.jpg"></p>
+						</div>
+					</div>
+					
+				</li>
+			</ul>
+		</li>
+	</ul>
+	
+	<!--banner大图轮播-->
+	<div id="banner"  class="ck-slide">
+		<ul class="ck-slide-wrapper">
+			<li class="banner_pic1" style="display: block;"><a href=""></a></li>
+			<li class="banner_pic2"><a href=""></a></li>
+			<li class="banner_pic3"><a href=""></a></li>
+			<li class="banner_pic4"><a href=""></a></li>
+			<li class="banner_pic5"><a href=""></a></li>
+			<li class="banner_pic6"><a href=""></a></li>
+			<li class="banner_pic7"><a href=""></a></li>
+		</ul>
+		
+		
+		<a href="javascript:;" id="banner_rightbtn"  class="ctrl-slide ck-next"></a>
+		<a href="javascript:;" id="banner_leftbtn"  class="ctrl-slide ck-prev"></a>	
+		
+		<div class="ck-slidebox">
+			<div id="banner_nav"  class="slideWrap">
+				<ul class="banner_nav_list dot-wrap">
+					<li class="current"><em>1</em></li>
+					<li><em>2</em></li>
+					<li><em>3</em></li>
+					<li><em>4</em></li>
+					<li><em>5</em></li>
+					<li><em>6</em></li>
+					<li><em>7</em></li>
+				</ul>
+			</div>
+		</div>	
+	</div>
+	
+	<!--品牌特卖-->
+	<div id="brand_sale">
+		<h1 id="bigTitle">
+			<span>品牌特卖</span>
+			<ul>
+				<li class="list1 methidli">
+					推荐品牌
+					
+					<ul class="brand_sale_list recommend">
+						<li><img src="/static/images/mall/0614mt.jpg"></li>
+						<li><img src="/static/images/mall/0418wly.jpg"></li>
+						<li><img src="/static/images/mall/0315lz.jpg"></li>
+						<li style="margin-right: 0;"><img src="/static/images/mall/0618tianyoude.jpg"></li>
+					</ul>
+				</li>
+				
+				<li class="list1">
+					国际品牌
+					
+					<ul class="brand_sale_list internationalBrand">
+						<li><img src="/static/images/mall/lafei.jpg"></li>
+						<li><img src="/static/images/mall/0718telatuo.jpg"></li>
+						<li><img src="/static/images/mall/makesiwei.jpg"></li>
+						<li style="margin-right: 0;"><img src="/static/images/mall/daishu.jpg"></li>
+					</ul>
+				</li>
+				
+				<li class="list1">
+					国内品牌
+					
+					<ul class="brand_sale_list domesticBrand">
+						<li><img src="/static/images/mall/fenjiu.jpg"></li>
+						<li><img src="/static/images/mall/guotai.jpg"></li>
+						<li><img src="/static/images/mall/kongfujia.jpg"></li>
+						<li style="margin-right: 0;"><img src="/static/images/mall/zhangyu.jpg"></li>
+					</ul>
+				</li>
+			</ul>
+		</h1>
+		
+	</div>
+	
+	
+	<div id="flash_sale">
+		<h1 id="bigTitle">
+			<span class="flashSale">
+				限时抢购
+				<span>
+					<i></i>
+					<span class="clocknum">还剩  天 时 分 秒结束</span>
+				</span>
+			</span>
+
+			<ul>
+				<li class="list1 methidli">
+					当前抢购
+					<ul class="flashSale_list lootBuy">
+						<li style="margin-left: 0;">
+							<a href="html/ productDetails.html">
+								<img src="/static/images/mall/b57599993c67M.jpg">
+								<p>52°泸州窖酒（窖藏龙窖）500ml*6 </p>								
+								<span class="price">￥198.00</span>
+								<span class="btn">立即抢购</span>								
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/d9436102-ab44-4c61-bb15-ebc75fbfe367M.jpg.png">
+								<p>53°一道泓酱香传奇 1000ml*2 </p>								
+								<span class="price">￥99.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/9e91395b-0c67-4587-889d-ded9a61aeb39M.jpg.png">
+								<p>52°鸭溪窖-古酿 500ml （2瓶装） </p>								
+								<span class="price">￥138.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/d75b339a-dc81-4a92-9477-99fea4becc0bM.jpg.png">
+								<p>52°五粮液永不分离精品500ml（6瓶装）</p>								
+								<span class="price">￥149.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/6d04a873-d1a4-4036-93e3-7ceedf91b065M.jpg.png">
+								<p>欧菲干红葡萄酒 750ml（6瓶装）</p>								
+								<span class="price">￥99.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li style="margin: 0;">
+							<a>
+								<img src="/static/images/mall/893c056e-1775-4168-8edd-b69f0123405dM.jpg.png">
+								<p>52°泸州老窖鉴赏级酒品典藏3 480ml*6</p>								
+								<span class="price">￥99.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>	
+						</li>
+					</ul>
+				</li>
+				
+				<li class="list1">
+					下期预告					
+					<ul class="flashSale_list nextUp">
+						<li  style="margin-left: 0;">
+							<a>
+								<img src="/static/images/mall/637349cd-6e33-4fe1-9b1c-2ead9c5bfe9bM.jpg.png">
+								<p>53°国台·好礼 500ml*2（礼盒装）</p>								
+								<span class="price">￥228.00</span>
+								<span class="btn">立即抢购</span>								
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/f3d8da0c-65fb-4439-bde5-379604999a7dM.jpg.png">
+								<p>53°茅台王子酒（旧包装） 500ml（6瓶装）</p>								
+								<span class="price">￥529.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/c6f54723-69cf-4af6-a602-e83bf97ff1eeM.jpg.png ">
+								<p>52°出口型白西凤绵柔凤香型 500ml*6	</p>								
+								<span class="price">￥499.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/1e20f81e-5d30-43dd-aa58-05fe3ae738a0M.jpg.png">
+								<p>53°玻璃瓶汾酒 475ml 玻璃汾*6 </p>								
+								<span class="price">￥239.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li>
+							<a>
+								<img src="/static/images/mall/ca857f6b-37ef-4cc3-b9b9-4611d677794fM.jpg.png">
+								<p>52°五粮液华彩人生10典藏500ml*6 </p>								
+								<span class="price">￥298.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>
+							
+						</li>
+						<li style="margin: 0;">
+							<a>
+								<img src="/static/images/mall/d9436102-ab44-4c61-bb15-ebc75fbfe367M.jpg.png">
+								<p>53°一道泓酱香传奇 1000ml*2</p>								
+								<span class="price">￥99.00</span>
+								<span class="btn">立即抢购</span>	
+							</a>	
+						</li>
+					</ul>
+				</li>
+				
+			</ul>
+		</h1>
+		
+	</div>
+	
+	
+	<!-- ***************************************** 白酒 *******************************-->
+	<div id="whiteSpirit">
+		<ul id="whiteSpiritTitle" class="whiteSpiritTitle">
+			<li class="whiteSpirit_icon"></li>
+			
+			<li class="whiteSpirit_name">白酒</li>
+			
+			<li class="whiteSpirit_nav select">爆品推荐</li>
+			
+			<li class="whiteSpirit_nav ">茅台</li>
+			
+			<li class="whiteSpirit_nav ">五粮液</li>
+			
+			<li class="whiteSpirit_nav ">酱香</li>
+			
+			<li class="whiteSpirit_nav ">浓香</li>
+			
+			<li class="whiteSpirit_nav ">清香</li>
+			
+			<li class="whiteSpirit_more">更多</li>
+			
+			
+			<li id="icon_v">
+				
+			</li>
+		</ul>
+		
+		<div id="whiteSpiritCenter" class="whiteSpiritCenter">
+			<div class="whiteSpiritCenter_left">
+				<ul class="whiteSpiritCenter_nav">
+					<li><a href="">茅台</a></li>
+					<li><a href="">五粮液</a></li>
+					<li><a href="">泸州老窖</a></li>
+					<li><a href="">洋河</a></li>
+					<li><a href="">牛栏山</a></li>
+					<li><a href="">一道泓</a></li>
+					<li><a href="">汾酒</a></li>
+					<li><a href="">天佑德</a></li>
+				</ul>
+				
+				<a class="askForInformation" href=""></a>
+			</div>
+			
+			<!--白酒六大显示区-->
+			
+			<!--爆品推荐 hotreCommend  显示区  -->
+			<ul class="whiteSpiritCenter_center hotreCommend">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c58f78e2-5d22-4a0c-9fa0-a94089a41a90M.jpg.png" />
+						<p>53°成龙酒·成龙祥凤礼盒 500ml*2</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c8fed83c-6573-405b-a4a0-40eb461304f4M.jpg" />
+						<p>52°五粮液 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/8ec89c19-056c-4057-ac9b-b57599993c67M.jpg.png" />
+						<p>52°泸州窖酒（窖藏龙窖） 500ml（6瓶装）</p>
+						<b>￥178.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/d0da730e-b2cf-4446-80ec-06ae28fa7b1cM.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥173.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/a829e011-ff1c-4a8d-8fcd-27fad3cdbf6dM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥359.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/0b468d32-5b27-4293-83e6-54fa2584d7b9M.jpg.png" />
+						<p>53° 一道泓酱香老酒 500ml（6瓶装）</p>
+						<b>￥199.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/zmzxj.png" />
+					<a href="">						
+						<img src="/static/images/mall/637349cd-6e33-4fe1-9b1c-2ead9c5bfe9bM.jpg.png" />
+						<p>53°国台·好礼 500ml*2（礼盒装）</p>
+						<b>￥228.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/820cd532-6ff5-41e8-81f0-72dcb8eaf7c8M.jpg.png" />
+						<p>53°茅台王子酒（旧包装） 500ml（2瓶装）</p>
+						<b>￥188.00</b>
+					</a>
+				</li>
+			</ul>
+			
+			
+			
+			<!--茅台  Moutai 显示区  -->
+			<ul class="whiteSpiritCenter_center Moutai">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/Moutai1.jpg.png" />
+						<p>53°茅台飞天 500ml</p>
+						<b>￥999.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/Moutai2.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥139.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/Moutai3.jpg.png" />
+						<p>53°茅台飞天 500ml（2瓶装）</p>
+						<b>￥1998.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/Moutai4.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/xdjsy.png" />
+					<a href="">
+						<img src="/static/images/mall/Moutai5.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥529.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/Moutai6.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥599.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">						
+						<img src="/static/images/mall/Moutai7.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥299.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/Moutai8.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥359.00</b>
+					</a>
+				</li>
+			</ul>
+			
+			
+			
+			<!--五粮液 Wuliangye  显示区  -->
+			<ul class="whiteSpiritCenter_center Wuliangye">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c8fed83c-6573-405b-a4a0-40eb461304f4M.jpg" />
+						<p>53°茅台飞天 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/a7089301-1a83-4b24-9790-23f8671c3d68M.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/5dc719e1-655c-4432-b526-60079027fb87M.jpg" />
+						<p>53°茅台飞天 500ml（2瓶装）</p>
+						<b>￥199.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/dcff2f66-a224-433b-b16a-b8544125fb44M.jpg" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/sdkyx.png" />
+					<a href="">
+						<img src="/static/images/mall/3276694d-b934-43dd-b43e-691e43662bc4M.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥498.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/6108eb2f-7da8-486b-80a1-88a56cf998adM.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥169.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">						
+						<img src="/static/images/mall/fec08d73-0dca-425d-91bb-cde6ff87d864M.jpg" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥719.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/ca857f6b-37ef-4cc3-b9b9-4611d677794fM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+			</ul>
+			
+			
+						
+			<!--酱香 Jiangxiang  显示区  -->
+			<ul class="whiteSpiritCenter_center Jiangxiang">
+				<li>
+					<img class="position_icon" src="/static/images/mall/dtsh.png" />
+					<a href="">
+						<img src="/static/images/mall/8db536bb-3d55-4694-96dc-42afb78d0a4aM.jpg.png" />
+						<p>53°茅台飞天 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/888c31d4-5d62-41c7-8121-2b5b164e584bM.jpg" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/e381d463-1d0e-4859-97b0-122cf098bb0dM.jpg.png" />
+						<p>53°茅台飞天 500ml（2瓶装）</p>
+						<b>￥199.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/zmzxj.png" />
+					<a href="">
+						<img src="/static/images/mall/637349cd-6e33-4fe1-9b1c-2ead9c5bfe9bM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥498.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/4f3a25cb-8a40-4263-a4c0-776338d762a2M.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+							
+				<li>
+					<a href="">
+						<img src="/static/images/mall/76967d3a-efe4-43b9-ab3e-7361912cc618M.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥169.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img src="/static/images/mall/xdjsy.png" />
+					<a href="">						
+						<img src="/static/images/mall/f3d8da0c-65fb-4439-bde5-379604999a7dM.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥719.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/2492374b-0db3-487c-8a2e-01734ec85bafM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+			</ul>
+			
+			
+						
+			<!--浓香  Aromatic  显示区  -->
+			<ul class="whiteSpiritCenter_center Aromatic">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/893c056e-1775-4168-8edd-b69f0123405dM.jpg.png" />
+						<p>53°茅台飞天 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/70031a90-a17b-4b05-ace9-095915807423M.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+
+				<li>
+					<img class="position_icon" src="/static/images/mall/dejbj.png" />
+					<a href="">
+						<img src="/static/images/mall/87a5b4f7-2890-4ec7-9389-bdc88ade70f0M.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/dejbj.png" />
+					<a href="">
+						<img src="/static/images/mall/f57a07dc-1db8-4605-ba49-a0ad1d9a8f16M.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥498.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/f91ef580-5efa-4661-b515-4e8e5856c5c9M.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+							
+				<li>
+					<a href="">
+						<img src="/static/images/mall/8ec89c19-056c-4057-ac9b-b57599993c67M.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥169.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/d9faa689-e180-4e06-9f48-f13f697843d7M.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon"  src="/static/images/mall/myz1.png" />
+					<a href="">
+						<img src="/static/images/mall/9d54d59d-ce32-4063-99fe-335561735a7fM.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+			</ul>
+			
+			
+					
+			<!--清香 Faintscent  显示区  -->
+			<ul class="whiteSpiritCenter_center Faintscent">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/0418wly.jpg" />
+						<p>52°茅台飞天 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/0630jxljguanggao.jpg" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+
+				<li>
+					<img class="position_icon" src="/static/images/mall/dejbj.png" />
+					<a href="">
+						<img src="/static/images/mall/87a5b4f7-2890-4ec7-9389-bdc88ade70f0M.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/dejbj.png" />
+					<a href="">
+						<img src="/static/images/mall/f57a07dc-1db8-4605-ba49-a0ad1d9a8f16M.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥498.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/f91ef580-5efa-4661-b515-4e8e5856c5c9M.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+							
+				<li>
+					<a href="">
+						<img src="/static/images/mall/8ec89c19-056c-4057-ac9b-b57599993c67M.jpg.png" />
+						<p>43°飞天茅台 500ml</p>
+						<b>￥169.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/d9faa689-e180-4e06-9f48-f13f697843d7M.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon"  src="/static/images/mall/myz1.png" />
+					<a href="">
+						<img src="/static/images/mall/9d54d59d-ce32-4063-99fe-335561735a7fM.jpg.png" />
+						<p>53°茅台王子-酱门经典（新包装） 500ml</p>
+						<b>￥439.00</b>
+					</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+						
+			<!--白酒左边两张图区域-->
+			<div class="whiteSpiritCenter_right">
+				<a href=""><img src="/static/images/mall/0620xifeng.jpg"/></a>
+				<a href=""><img src="/static/images/mall/0630jxljguanggao.jpg" /></a>
+			</div>
+		</div>
+		
+		
+		<!--白酒底图商标-->
+		<ul id="whiteSpiritBottom">
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/maotai.jpg" />
+				<span>茅台</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/wuliangye.jpg" />
+				<span>五粮液</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/fenjiutu.jpg" />
+				<span>汾酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/jiannanchun.jpg" />
+				<span>剑南春</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xiaohutuxian.jpg" />
+				<span>小糊涂仙</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yidaohong.jpg" />
+				<span>一道泓</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/luzhoulaojiao.jpg" />
+				<span>泸州老窖</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/tianyoude.jpg" />
+				<span>天佑德</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/brand1_12.jpg" />
+				<span>郎酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yanghe.jpg" />
+				<span>洋河</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xifeng.jpg" />
+				<span>西凤</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/niulanshan.jpg" />
+				<span>牛栏山</span>
+			</li>
+		</ul>
+		
+	</div>
+	
+	
+	
+	
+	<!-- ***************************************** 红酒 *******************************-->
+	<div id="redSpirit">
+		<ul id="whiteSpiritTitle">
+			<li class="wine_icon"></li>
+			
+			<li class="wine_name">红酒</li>
+			
+			<li class="whiteSpirit_nav ">热卖</li>
+			
+			<li class="whiteSpirit_nav ">白葡萄酒</li>
+			
+			<li class="whiteSpirit_nav ">起泡酒</li>
+			
+			<li class="whiteSpirit_nav ">特拉托</li>
+			
+			<li class="whiteSpirit_nav ">中级庄</li>
+			
+			<li class="whiteSpirit_more">更多</li>
+		</ul>
+		
+		<div id="whiteSpiritCenter">
+			<div class="wineCenter_left">
+				<ul class="whiteSpiritCenter_nav">
+					<li><a href="">拉菲</a></li>
+					<li><a href="">法国</a></li>
+					<li><a href="">张裕</a></li>
+					<li><a href="">澳大利亚</a></li>
+					<li><a href="">佩西</a></li>
+					<li><a href="">特拉托</a></li>
+					<li><a href="">马爵</a></li>
+				</ul>
+				
+				<a class="askForInformation" href=""></a>
+			</div>
+			
+			<!--特卖 hotreCommend  显示区  -->
+			<ul class="whiteSpiritCenter_center hotreCommend">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c58f78e2-5d22-4a0c-9fa0-a94089a41a90M.jpg.png" />
+						<p>53°成龙酒·成龙祥凤礼盒 500ml*2</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c8fed83c-6573-405b-a4a0-40eb461304f4M.jpg" />
+						<p>52°五粮液 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/8ec89c19-056c-4057-ac9b-b57599993c67M.jpg.png" />
+						<p>52°泸州窖酒（窖藏龙窖） 500ml（6瓶装）</p>
+						<b>￥178.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/d0da730e-b2cf-4446-80ec-06ae28fa7b1cM.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥173.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/a829e011-ff1c-4a8d-8fcd-27fad3cdbf6dM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥359.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/0b468d32-5b27-4293-83e6-54fa2584d7b9M.jpg.png" />
+						<p>53° 一道泓酱香老酒 500ml（6瓶装）</p>
+						<b>￥199.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/zmzxj.png" />
+					<a href="">						
+						<img src="/static/images/mall/637349cd-6e33-4fe1-9b1c-2ead9c5bfe9bM.jpg.png" />
+						<p>53°国台·好礼 500ml*2（礼盒装）</p>
+						<b>￥228.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/820cd532-6ff5-41e8-81f0-72dcb8eaf7c8M.jpg.png" />
+						<p>53°茅台王子酒（旧包装） 500ml（2瓶装）</p>
+						<b>￥188.00</b>
+					</a>
+				</li>
+			</ul>
+			
+		
+			<!--红酒左边两张图区域-->
+			<div class="whiteSpiritCenter_right">
+				<a href=""><img src="/static/images/mall/napagu.jpg"/></a>
+				<a href=""><img src="/static/images/mall/of.jpg" /></a>
+			</div>
+		</div>
+		
+		
+		<!--红酒底图商标-->
+		<ul id="whiteSpiritBottom">
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/maotai.jpg" />
+				<span>茅台</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/wuliangye.jpg" />
+				<span>五粮液</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/fenjiutu.jpg" />
+				<span>汾酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/jiannanchun.jpg" />
+				<span>剑南春</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xiaohutuxian.jpg" />
+				<span>小糊涂仙</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yidaohong.jpg" />
+				<span>一道泓</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/luzhoulaojiao.jpg" />
+				<span>泸州老窖</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/tianyoude.jpg" />
+				<span>天佑德</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/brand1_12.jpg" />
+				<span>郎酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yanghe.jpg" />
+				<span>洋河</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xifeng.jpg" />
+				<span>西凤</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/niulanshan.jpg" />
+				<span>牛栏山</span>
+			</li>
+		</ul>		
+	</div>
+	
+	
+	
+	<!-- ***************************************** 洋酒 *******************************-->
+	<div id="yangSpirit">
+		<ul id="whiteSpiritTitle">
+			<li class="foreignWine_icon"></li>
+			
+			<li class="foreignWine_name">洋酒</li>
+			
+			<li class="whiteSpirit_nav ">热卖</li>
+			
+			<li class="whiteSpirit_nav ">伏特加/白兰</li>
+			
+			<li class="whiteSpirit_nav ">朗姆酒</li>
+			
+			<li class="whiteSpirit_nav ">威士忌</li>
+			
+			<li class="whiteSpirit_more">更多</li>
+		</ul>
+		
+		<div id="whiteSpiritCenter">
+			<div class="foreignWineCenter_left">
+				<ul class="whiteSpiritCenter_nav">
+					<li><a href="">拉菲</a></li>
+					<li><a href="">法国</a></li>
+					<li><a href="">张裕</a></li>
+					<li><a href="">澳大利亚</a></li>
+					<li><a href="">佩西</a></li>
+					<li><a href="">特拉托</a></li>
+					<li><a href="">马爵</a></li>
+				</ul>
+				
+				<a class="askForInformation" href=""></a>
+			</div>
+			
+			<!--白酒六大显示区-->
+			
+			<!--特卖 hotreCommend  显示区  -->
+			<ul class="whiteSpiritCenter_center hotreCommend">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c58f78e2-5d22-4a0c-9fa0-a94089a41a90M.jpg.png" />
+						<p>53°成龙酒·成龙祥凤礼盒 500ml*2</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c8fed83c-6573-405b-a4a0-40eb461304f4M.jpg" />
+						<p>52°五粮液 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/8ec89c19-056c-4057-ac9b-b57599993c67M.jpg.png" />
+						<p>52°泸州窖酒（窖藏龙窖） 500ml（6瓶装）</p>
+						<b>￥178.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/d0da730e-b2cf-4446-80ec-06ae28fa7b1cM.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥173.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/a829e011-ff1c-4a8d-8fcd-27fad3cdbf6dM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥359.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/0b468d32-5b27-4293-83e6-54fa2584d7b9M.jpg.png" />
+						<p>53° 一道泓酱香老酒 500ml（6瓶装）</p>
+						<b>￥199.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/zmzxj.png" />
+					<a href="">						
+						<img src="/static/images/mall/637349cd-6e33-4fe1-9b1c-2ead9c5bfe9bM.jpg.png" />
+						<p>53°国台·好礼 500ml*2（礼盒装）</p>
+						<b>￥228.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/820cd532-6ff5-41e8-81f0-72dcb8eaf7c8M.jpg.png" />
+						<p>53°茅台王子酒（旧包装） 500ml（2瓶装）</p>
+						<b>￥188.00</b>
+					</a>
+				</li>
+			</ul>
+			
+		
+			<!--白酒左边两张图区域-->
+			<div class="whiteSpiritCenter_right">
+				<a href=""><img src="/static/images/mall/0606heifang.jpg"/></a>
+				<a href=""><img src="/static/images/mall/jiekedanni.jpg" /></a>
+			</div>
+		</div>
+		
+		
+		<!--白酒底图商标-->
+		<ul id="whiteSpiritBottom">
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/maotai.jpg" />
+				<span>茅台</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/wuliangye.jpg" />
+				<span>五粮液</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/fenjiutu.jpg" />
+				<span>汾酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/jiannanchun.jpg" />
+				<span>剑南春</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xiaohutuxian.jpg" />
+				<span>小糊涂仙</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yidaohong.jpg" />
+				<span>一道泓</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/luzhoulaojiao.jpg" />
+				<span>泸州老窖</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/tianyoude.jpg" />
+				<span>天佑德</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/brand1_12.jpg" />
+				<span>郎酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yanghe.jpg" />
+				<span>洋河</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xifeng.jpg" />
+				<span>西凤</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/niulanshan.jpg" />
+				<span>牛栏山</span>
+			</li>
+		</ul>		
+	</div>
+	
+	
+	
+	
+	<!-- ***************************************** 其他 *******************************-->
+	<div id="otherSpirit">
+		<ul id="whiteSpiritTitle">
+			<li class="other_icon"></li>
+			
+			<li class="foreignWine_name">其它</li>
+			
+			<li class="whiteSpirit_nav ">热卖</li>
+			
+			<li class="whiteSpirit_nav ">预调酒</li>
+			
+			<li class="whiteSpirit_nav ">黄酒</li>		
+			
+			<li class="whiteSpirit_nav ">酒具/礼盒</li>
+			
+			<li class="whiteSpirit_more">更多</li>
+		</ul>
+		
+		<div id="whiteSpiritCenter">
+			<div class="foreignWineCenter_left">
+				<ul class="whiteSpiritCenter_nav">
+					<li><a href="">拉菲</a></li>
+					<li><a href="">法国</a></li>
+					<li><a href="">张裕</a></li>
+					<li><a href="">澳大利亚</a></li>
+					<li><a href="">佩西</a></li>
+					<li><a href="">特拉托</a></li>
+					<li><a href="">马爵</a></li>
+				</ul>
+				
+				<a class="askForInformation" href=""></a>
+			</div>
+			
+			<!--白酒六大显示区-->
+			
+			<!--特卖 hotreCommend  显示区  -->
+			<ul class="whiteSpiritCenter_center hotreCommend">
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c58f78e2-5d22-4a0c-9fa0-a94089a41a90M.jpg.png" />
+						<p>53°成龙酒·成龙祥凤礼盒 500ml*2</p>
+						<b>￥298.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/c8fed83c-6573-405b-a4a0-40eb461304f4M.jpg" />
+						<p>52°五粮液 500ml</p>
+						<b>￥729.00</b>
+					</a>
+				</li>
+
+				<li>
+					<a href="">
+						<img src="/static/images/mall/8ec89c19-056c-4057-ac9b-b57599993c67M.jpg.png" />
+						<p>52°泸州窖酒（窖藏龙窖） 500ml（6瓶装）</p>
+						<b>￥178.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/d0da730e-b2cf-4446-80ec-06ae28fa7b1cM.jpg.png" />
+						<p>52°汾酒封坛原酒 1500ml （2瓶装）</p>
+						<b>￥173.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/a829e011-ff1c-4a8d-8fcd-27fad3cdbf6dM.jpg.png" />
+						<p>53°茅台迎宾酒（旧包装） 500ml（6瓶装）</p>
+						<b>￥359.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/0b468d32-5b27-4293-83e6-54fa2584d7b9M.jpg.png" />
+						<p>53° 一道泓酱香老酒 500ml（6瓶装）</p>
+						<b>￥199.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<img class="position_icon" src="/static/images/mall/zmzxj.png" />
+					<a href="">						
+						<img src="/static/images/mall/637349cd-6e33-4fe1-9b1c-2ead9c5bfe9bM.jpg.png" />
+						<p>53°国台·好礼 500ml*2（礼盒装）</p>
+						<b>￥228.00</b>
+					</a>
+				</li>
+				
+				<li>
+					<a href="">
+						<img src="/static/images/mall/820cd532-6ff5-41e8-81f0-72dcb8eaf7c8M.jpg.png" />
+						<p>53°茅台王子酒（旧包装） 500ml（2瓶装）</p>
+						<b>￥188.00</b>
+					</a>
+				</li>
+			</ul>
+			
+		
+			<!--白酒左边两张图区域-->
+			<div class="whiteSpiritCenter_right">
+				<a href=""><img src="/static/images/mall/zuiqing.jpg"/></a>
+				<a href=""><img src="/static/images/mall/yidaohong2.jpg" /></a>
+			</div>
+		</div>
+		
+		
+		<!--白酒底图商标-->
+		<ul id="whiteSpiritBottom">
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/maotai.jpg" />
+				<span>茅台</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/wuliangye.jpg" />
+				<span>五粮液</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/fenjiutu.jpg" />
+				<span>汾酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/jiannanchun.jpg" />
+				<span>剑南春</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xiaohutuxian.jpg" />
+				<span>小糊涂仙</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yidaohong.jpg" />
+				<span>一道泓</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/luzhoulaojiao.jpg" />
+				<span>泸州老窖</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/tianyoude.jpg" />
+				<span>天佑德</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/brand1_12.jpg" />
+				<span>郎酒</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/yanghe.jpg" />
+				<span>洋河</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/xifeng.jpg" />
+				<span>西凤</span>
+			</li>
+			<li>
+				<a href=""></a>
+				<img src="/static/images/mall/niulanshan.jpg" />
+				<span>牛栏山</span>
+			</li>
+		</ul>		
+	</div>
+	
+	
+	<!--底部-->
+	<div id="QSguarantee_warp">
+		<ul id="QSguarantee">
+			<li class="QS_firstChild">
+				<i class="QA"></i>
+				<h3>品质保障</h3>
+				<p>厂家直销 真品防伪</p>
+			</li>
+			<li>
+				<i class="O2O"></i>
+				<h3>酒类O2O</h3>
+				<p>线上线下标准化</p>
+			</li>
+			<li>
+				<i class="SR"></i>
+				<h3>7天无理由退货</h3>
+				<p>拆封无条件退货</p>
+			</li>
+			<li>
+				<i class="FS"></i>
+				<h3>快速安全</h3>
+				<p>专业配送 安全到达</p>
+			</li>
+			<li>
+				<i class="ML"></i>
+				<h3>百万口碑</h3>
+				<p>400万用户的认可</p>
+			</li>
+			<li>
+				<i class="KS"></i>
+				<h3>金牌服务</h3>
+				<p>7*12小时贴心服务</p>
+			</li>
+		</ul>
+	</div>
+	
+	
+	<div id="service_warp">
+		<div id="service">
+			<dl>
+				<dt>购物指南</dt>
+				<dd><a href="">购物流程</a></dd>
+				<dd><a href="">常见问题</a></dd>
+				<dd><a href="">帮助中心</a></dd>
+				<dd><a href="">会员协议</a></dd>
+			</dl>
+			<dl>
+				<dt>购物配送</dt>
+				<dd><a href="">99免运费</a></dd>
+				<dd><a href="">配送说明</a></dd>
+				<dd><a href="">快递查询</a></dd>
+				<dd><a href="">验货与签收</a></dd>
+			</dl>
+			<dl>
+				<dt>支付方式</dt>
+				<dd><a href="">货到付款</a></dd>
+				<dd><a href="">支付宝</a></dd>
+				<dd><a href="">银联 信用卡</a></dd>
+				<dd><a href="">在线支付9.9折</a></dd>
+			</dl>
+			<dl>
+				<dt>售后服务</dt>
+				<dd><a href="">服务承诺</a></dd>
+				<dd><a href="">退款说明</a></dd>
+				<dd><a href="">退换货政策</a></dd>
+				<dd><a href="">退换货流程</a></dd>
+			</dl>
+			<dl>
+				<dt>服务保障</dt>
+				<dd><a href="">真品防伪 四码合一</a></dd>
+				<dd><a href="">7天无条件退货</a></dd>
+				<dd><a href="">7*12小时贴心服务</a></dd>
+				<dd><a href="">30分钟快速响应</a></dd>
+			</dl>
+			
+			<dl class="phone_zj">
+				<dt>手机中酒</dt>
+				<dd>下载移动客户端</dd>
+			</dl>
+			<dl class="weixin_zj">
+				<dt>中酒微信</dt>
+				<dd>中酒官方微博</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<div id="link_warp">		
+		<a class="link" href="">关于中酒</a>
+		<a href="">媒体报道</a>
+		<a href="">商务合作</a>
+		<a href="">品牌入驻</a>
+		<a href="">加入中酒</a>
+		<a href="">商家加盟</a>
+		<a href="">联系我们</a>
+	</div>
+	
+	<p id="Copyright">Copyright © 2016 中酒网(www.zhongjiu.cn) 版权所有 京ICP备12022216号-2  | 京公网安备 11010502026701 | 购买前请确认达到法定饮酒年龄！中酒网不销售任何含酒精产品给18岁以下人士！</p>
+	<p id="contactAddress">中酒时代酒业（北京）有限公司	地址：北京市朝阳区百子湾路16号百子园5号楼A单元106号    电话：010-87703553</p>
+	<div id="safetyWebsite">
+		<a href=""></a>
+		<a href=""></a>
+		<a href=""></a>
+		<a href=""></a>
+		<a href=""></a>
+	</div>
+	
+	
+	<!--右侧 固定定位 栏-->
+	<ul id="fixed_nav">
+		<li>
+			<a href=""><img src="/static/images/public/jiang-d.jpg" /></a>
+		</li>
+		<li><a href="">天佑德青稞酒</a></li>
+		<li><a href="html/myShoppingCart.html">购物车</a></li>
+		<li class="goTop"><a href="javascript:;">返回顶部</a></li>
+		<li><img src="/static/images/public/jiang-w.jpg"></li>
+	</ul>	
+</body>
+</html>

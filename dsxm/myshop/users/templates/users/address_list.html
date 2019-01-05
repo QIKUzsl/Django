@@ -1,0 +1,29 @@
+{% extends "store_base.html" %}
+{% block content %}
+<table border="" cellspacing="" cellpadding="">
+	<tr>
+		<th>收货人</th>
+		<th>电话号码</th>
+		<th>省份</th>
+		<th>城市</th>
+		<th>县区</th>
+		<th>街道</th>
+		<th>详细地址</th>
+		<th>是否默认地址</th>
+	</tr>
+	{% for address in addresses %}
+	<tr>
+		<td>{{address.recv_name}}</td>
+		<td>{{address.recv_tel}}</td>
+		<td>{{address.province}}</td>
+		<td>{{address.city}}</td>
+		<td>{{address.area}}</td>
+		<td>{{address.street}}</td>
+		<td>{{address.desc}}</td>
+		{% if address.is_default %}
+		<td>默认地址</td>
+		{% endif %}	
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

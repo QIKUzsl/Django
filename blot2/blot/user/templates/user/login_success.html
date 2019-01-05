@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style type="text/css">
+		.lists li{
+			width: 50px;
+			height: 20px;
+			color: gray;
+			margin-bottom: 5px;
+			padding-bottom: 10px;
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<img src="/{{ request.session.loginUser.header }}" style="width: 200px;height: 100px;" >
+	<div>欢迎您{{ request.session.loginUser.username }}登录我们的系统！！</div>
+	<div class="lists">
+		<ul><span class="text_one"><h3>钢铁是怎样练成的</h3></span>
+			<a href="/user/text1"><li>第一章</li></a>
+			<a href=""><li>第二章</li></a>
+			<a href=""><li>第三章</li></a>
+		</ul>
+	</div>
+	<a href="{% url 'user:home' %}"><button type="button">返回首页</button></a>
+</body>
+</html>

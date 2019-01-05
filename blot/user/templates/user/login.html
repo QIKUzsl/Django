@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+    </head>
+    <body>
+            用户名<input type="text" name="username" id="username" value="" />
+            密码<input type="password" name="passwd" id="passwd" value="" />
+            <input type="submit" onclick="add_article()" name="" id="" value="登录" />
+		<a href="http://127.0.0.1:8000/user/home"><button type="button">返回首页</button></a>
+    </body>
+	<script type="text/javascript/">
+		function add_article() {
+			// alert(111)
+			var xhr = new XMLHttpRequest()
+			xhr.open("POST","/user/login",true)
+		}
+	</script>
+</html>

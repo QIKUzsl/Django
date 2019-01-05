@@ -1,0 +1,30 @@
+{% extends 'userInfo.html' %}
+{% block userInfo %}
+<table class="personalData_table">
+	<tr class="personalData_rows1">
+		<td class="tablel rows1_left">昵称：</td>
+		<td>
+			<input type="text" id="" name="nickname" value="{{request.user.userinfo.nickname}}" />
+		</td>
+	</tr>
+	<tr class="personalData_rows1">
+		<td class="tablel rows1_left">年龄：</td>
+		<td>
+			<input type="text" id="" name="age" value="{{request.user.userinfo.age}}" />
+		</td>
+	</tr>
+	<tr class="personalData_rows1">
+		<td class="tablel rows1_left">性别：</td>
+		<td>
+			<input type="text" id="" name="gender" value="{{request.user.userinfo.gender}}" />
+		</td>
+	</tr>
+	<tr class="personalData_rows1">
+		<td class="tablel rows1_left">电话：</td>
+		<td>
+			<input type="text" id="" name="phone" value="{{request.user.userinfo.phone}}" />
+		</td>
+	</tr>
+	
+</table>
+{% endblock %}

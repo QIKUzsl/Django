@@ -1,0 +1,94 @@
+{% extends "store_base.html" %}
+{% block content %}
+<div id="accountSetting_warp">
+	<h1>店铺详情页面</h1>
+	<div>
+		<table border="1" cellspacing="" cellpadding="">
+			
+			<tr>
+				{% for store in stores %}
+				<td>店铺封面</td>
+				<td><img style="height: 200px; width: 200px;" src="/{{store.cover}}" ></td>
+				<td>店铺名称</td>
+				<td>{{store.name}}</td>
+				
+				<td>店铺状态</td>
+				<td>
+					{{store.status}}
+					{% if store.status == "0" %}
+						<p>正在营业</p>
+						<a href="{% url 'store:change' store.id "1" %}">暂停营业</a>
+						<a href="{% url 'store:change' store.id "2" %}">删除店铺</a>
+					{% elif store.status == "1" %}
+						<p>暂停营业</p>
+						<a href="{% url 'store:change' store.id "0" %}">开始营业</a>
+						<a href="{% url 'store:change' store.id "2" %}">删除店铺</a>
+					{% elif store.status == "2" %}
+						<p>该店以删除，请联系管理员</p>
+					{% endif %}
+				</td>
+				{% endfor %}
+			</tr>
+			
+		</table>
+		<hr >
+		<h2>上架商品</h2>
+		<form action="{% url "goods:add" %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			商品名称：<input type="text" name="name" value="" /><br>
+			商品单价：<input type="number" name="price"  value="" /><br>
+			商品库存：<input type="number" name="stock"  value="" /><br>
+			{% for store in stores %}
+			<input type="hidden" name="store" id="store_id"  value="{{store.id}}" />
+			{% endfor %}
+			商品图片：<input type="file" name="cover"  /><button type="button">继续添加</button><br>
+			商品类型：
+				<select name="type1" id="type1">
+					<option value ="-1">请选择一级类型</option>
+					{% for t in type1 %}
+					<option value ="{{t.id}}">{{t.name}}</option>
+					{% endfor %}
+				</select>
+				<select name="type2" id="type2"></select><br>
+			商品介绍：<textarea rows="10" cols="30" name="intro"></textarea><br>
+			<button>商品上架</button>
+		</form>
+		<hr >
+		{% for g in goods %}
+		<img src="/{{g.goodsimage_set.all.first.path}}" >===={{g.name}}===={{g.price}}====={{g.stock}}
+		<br>
+		<a href="{% url 'goods:detail' g.id %}">查看商品详情</a><br>
+		{% empty %}
+		当前商店没有上架商品
+		{% endfor %}
+	</div>
+</div>
+<script>
+	$(function(){
+		$("#type1").on("change",function(){
+			// alert($(this).val())
+			$.ajax({
+				url:"/goods/findTypeByPid/",
+				type:"get",
+				data:{"parent_id": $(this).val()},
+				success: function (data) {
+					$("#type2").empty()
+					data = JSON.parse(data)
+					for (var i = 0;i<data.length;i++) {
+						var type = data[i]
+						$op =$("<option>")
+						$op.attr("value", type.pk)
+						
+						$op.text(type.fields.name)
+						$("#type2").append($op)
+					}
+						
+				},
+				error: function () {
+					alert("网络异常，请重新点击")
+				},
+			})
+		})
+	})
+</script>
+{% endblock %}

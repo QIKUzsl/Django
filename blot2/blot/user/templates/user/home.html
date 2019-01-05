@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+    </head>
+    <body>
+        <h1>欢迎进入首页</h1>
+
+		<br>
+		<a href="http://127.0.0.1:8000/user/login">登录</a>
+		<a href="http://127.0.0.1:8000/user/register">注册</a>
+		<a href="{% url 'user:list_users' %}">列出所有用户</a>
+		<a href="{% url 'user:addArcticle' %}"><button type="button">发表文章</button></a>
+		
+		<div>
+			{% for u in page.object_list %}
+				{{u.username}}
+			{% endfor %}
+			<hr>
+			<a href="/user/home/?pageNow=1">首页</a>
+			{% if page.has_next %}
+			<a href="/user/home/?pageNow={{page.next_page_number}}">下一页</a>
+			{% endif %}
+			{% if page.has_previous %}
+			<a href="/user/home/?pageNow={{page.previous_page_number}}">上一页</a>
+			{% endif %}
+		</div>
+		
+    </body>
+</html>

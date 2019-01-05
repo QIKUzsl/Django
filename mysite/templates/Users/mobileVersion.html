@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="renderer" content="webkit">
+	<title>手机中酒网下载_随时逛及时抢</title>
+	<script type="text/javascript" src="../js/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="../js/mousewheel.js"></script>
+	<!--<script type="text/javascript" src="../js/other.js" ></script>-->
+	<link rel="shortcut icon" type="image/X-icon" href="../../static/images/public/title_logo.png" />
+	<link rel="stylesheet" href="../../static/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/mobileVersion.css"/>
+</head>
+<body>
+	
+	<!--头部-->
+	<div id="mobile_header">
+		<div id="mobile_header_center">
+			<h1>
+				<a href=""><img src="../../static/images/public/logo.jpg"></a>
+			</h1>
+			
+			<div id="mobile_header_nav">
+				<a href="">Android</a>
+				<a href="">iPone</a>
+				<a href="">ipad</a>
+				<a href="">wap/触屏</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--二维码背景-->
+	<div class="fixed_erimg">
+		<a href="javascript:;" class="fixed_btn"></a>
+	</div>
+	
+	
+	
+	<!--中间二维码图片-->
+	<div id=""></div>
+	
+	<section class="section-wrap">
+		<!--第一屏-->
+		<div class="section section-1">	
+			<div class="title active">
+				<img class="section-1_img1" src="../../static/images/login/lady01.png" />
+				<img class="section-1_img2" src="../../static/images/login/light.png" />
+				<div id="title_fixed" class="tf1">
+					<h2 class="title_fixed_wd">中酒会员招募强势来袭</h2>
+					<p class="title_fixed_wd">下载客户端首单立减5元</p>
+				</div>
+			</div>	
+		</div>
+		
+		<!--第二屏-->
+		<div class="section section-2">
+			<div class="title">
+				<img class="section-2_img" src="../../static/images/login/lady02.png" />
+				<div id="title_fixed" class="tf2">
+					<h2 class="title_fixed_wd">随时随地一键抢购</h2>
+					<p class="title_fixed_wd">全球美酒直送到您家</p>
+				</div>
+			</div>
+		</div>
+		
+		<!--第三屏-->
+		<div class="section section-3">
+			<div class="title">
+				<img class="section-3_img1" src="../../static/images/login/lady03.png" />
+				<img class="section-3_img2" src="../../static/images/login/plant.png" />
+				<div id="title_fixed" class="tf3">
+					<h2 class="title_fixed_wd">红包摇一摇百发百中</h2>
+					<p class="title_fixed_wd">红包送不停特享折上折</p>
+				</div>
+			</div>
+		</div>
+		
+		<!--第四屏-->
+		<div class="section section-4">
+			<div class="title">
+				<img class="section-4_img" src="../../static/images/login/lady04.png" />
+				<div id="title_fixed" class="tf4">
+					<h2 class="title_fixed_wd">便捷支付购物无忧</h2>
+					<p class="title_fixed_wd">在线支付货到付款</p>
+					<p class="title_fixed_wd">想怎么付就怎么付</p>
+				</div>
+			</div>
+		</div>
+		
+		<!--第五屏-->
+		<div class="section section-5">
+			<div class="title">
+				<img class="section-5_img" src="../../static/images/login/lady05.png" />
+				<div id="title_fixed" class="tf5">
+					<h2 class="title_fixed_wd">平价真酒 首选中酒</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!--右侧边栏按钮-->
+	<ul class="section-btn">
+	  <li class="on"></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	</ul>
+	
+	<!--向下按钮-->
+	<div class="arrow">&laquo;</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	//手机版  动画
+$(function(){
+	var i=0;
+	var $btn = $('.section-btn li'),
+		$wrap = $('.section-wrap'),
+		$arrow = $('.arrow');
+	//console.log(0)
+	/*当前页面赋值*/
+	function up(){i++;if(i==$btn.length){i=0};}
+	function down(){i--;if(i<0){i=$btn.length-1};}
+	
+	
+	//首次点开页面或刷新时先执行一次第一屏的动画
+	$('.tf1').css('opacity',0).animate({opacity:1},4000)
+	$('.section-1_img2').animate({top:125},2000);
+	/*页面滑动*/
+	function run(){
+		$btn.eq(i).addClass('on').siblings().removeClass('on');	
+		$wrap.attr("class","section-wrap").addClass(function() { return "put-section-"+i; }).find('.section').eq(i).find('.title').addClass('active');
+		
+		if(i==0){
+			$('.tf1').css('opacity',0).animate({opacity:1},4000)
+			$('.section-1_img2').css({'top':-100,'opacity':0}).animate({opacity:1,top:125},2000);
+		}else if(i==1){
+			$('.tf2').css('opacity',0).animate({opacity:1},4000)
+			$('.section-2_img').css({'top':'-10%','opacity':0}).animate({opacity:1,top:'30%'},2000);
+		}else if(i==2){
+			$('.tf3').css('opacity',0).animate({opacity:1},4000)
+			$('.section-3_img2').css({'bottom':0,'left':0,'opacity':0}).animate({opacity:1,left:'20%',top:'20%'},2000);
+		}else if(i==3){
+			$('.tf4').css('opacity',0).animate({opacity:1},4000)
+			$('.section-4_img').css({'bottom':0,'left':'30%','opacity':0}).animate({opacity:1,left:'10%',top:'10%'},2000);
+		}else{
+			$('.tf5').css('opacity',0).animate({opacity:1},4000)
+			$('.section-5_img').css({'bottom':0,'left':'30%','opacity':0}).animate({opacity:1,left:'10%',top:'10%'},2000);
+		}
+	};
+	
+	/*右侧按钮点击*/
+	$btn.each(function(index) {
+		$(this).click(function(){
+			i=index;
+			run();
+		})
+	});
+	
+	/*翻页按钮点击*/
+	$arrow.one('click',go);
+	function go(){
+		up();run();	
+		setTimeout(function(){$arrow.one('click',go)},1000)
+	};
+
+	/*响应鼠标*/
+	$wrap.one('mousewheel',mouse_);
+	function mouse_(event){
+		if(event.deltaY<0) {up()}
+		else{down()}
+		run();
+		
+		setTimeout(function(){$wrap.one('mousewheel',mouse_)},1000)
+	};
+	
+	/*响应键盘上下键*/
+	$(document).one('keydown',k);
+	function k(event){
+		var e=event||window.event;
+		var key=e.keyCode||e.which||e.charCode;
+		switch(key)	{
+			case 38: down();run();	
+			break;
+			case 40: up();run();	
+			break;
+		};
+		setTimeout(function(){$(document).one('keydown',k)},1000);
+	}
+	
+	
+	
+	
+		
+	
+	
+});
+	
+	
+</script>
+
+</body>
+</html>

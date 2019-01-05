@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+    </head>
+    <body>
+        <form action="{% url 'user:login' %}" method="POST">
+			{% csrf_token %}
+            用户名<input type="text" name="username" id="username" value="" /><br>
+
+            密码<input type="password" name="passwd" id="passwd" value="" /><br>
+			<p>{{msg}}</p>
+			验证码<input type="text" name="code"  value="" />
+			<img id="code" src="{% url 'user:createCode' %}" alt="" onclick="refresh_check_code(this)"><br>
+            <input type="submit" name="" id="" value="登录" />
+        </form>
+		
+		{% if username == '' %}
+		<h3>用户名或密码不能为空！！！</h3>
+		{% elif passwd == '' %}
+		<h3>用户名或密码不能为空！！！</h3>
+		{% endif %}
+		<a href="{% url 'user:home' %}"><button type="button">返回首页</button></a>
+		
+		<script type="text/javascript">
+			function refresh_check_code(node) {
+				// document.getElementById("code").src = '/user/createCode/?id=' + Math.random()
+			node.src = '/user/createCode/?search=' + Math.random();
+			}
+		</script>
+    </body>
+</html>

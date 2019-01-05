@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<script src="../../static/user/js/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="/static/tiny_mce/tiny_mce.js" ></script> -->
+</head>
+<body>
+		
+		{{msg}}
+		标题<input type="text" name="title" id="title" value=""  />
+
+		<textarea name="content" id="content" rows="20" cols="10">
+		
+		</textarea>
+		{% csrf_token %}
+		<input type="text" name="user_id" id="user_id"  placeholder="请输入作者编号"/>
+		<input type="submit" id="add_article" value="提交"/>
+		<!-- <input type="submit"  onclick="addArcticle_ajax()" value="提交"/> -->
+		
+	<script>
+
+		$(function(){
+			$("#add_article").click(function(){
+				$.ajax({
+					url:"/user/addArcticle_ajax/",
+					data:{"title":$("#title").val(),"content":$("#content").val()},
+					"type":"POST",
+					"dataType":"JSON",
+					success:function(data){
+						if(data,success){
+							alert(data.msg)
+						}
+					},
+					error:function(data){
+						if(data,error){
+							alert(data.msg)
+						}
+					}
+				})
+			})
+		})
+	</script>
+</body>
+</html>

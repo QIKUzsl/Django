@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	{{msg}}
+	<form action="{% url 'user:register1' %}" method="POST">
+		{% csrf_token %}
+		{{form1.as_ul}}
+		<input type="submit" name="" id="" value="注册" />
+	</form>
+	<a href="{% url 'user:home' %}"><button type="button">返回首页</button></a>
+</body>
+</html>

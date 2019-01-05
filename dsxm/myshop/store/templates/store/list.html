@@ -1,0 +1,26 @@
+{% extends "store_base.html" %}
+{% block content %}
+<div id="accountSetting_warp">
+	<h1>查看自己的店铺</h1>
+	<div id="setting">
+		<table border="1" cellspacing="" cellpadding="">
+			{% for store in stores %}
+			<tr>
+				<td>店铺封面</td>
+				<td><img style="height: 200px; width: 200px;" src="/{{store.cover}}" ></td>
+				<td>店铺名称</td>
+				<td>{{store.name}}</td>
+				<td>店铺描述</td>
+				<td>{{store.intro}}</td>
+				<td><a href="{% url 'store:detail' store.id %}">查询详情</a></td>
+			</tr>
+			{% empty %}
+			<tr>
+				<td>您还没有店铺赶紧去<a href="{% url 'store:add' %}"></a>开店吧</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+{% endblock %}
+

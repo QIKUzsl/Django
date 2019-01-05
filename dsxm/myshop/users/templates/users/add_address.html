@@ -1,0 +1,101 @@
+{% extends "store_base.html" %}
+{% block content %}
+<form action="{% url 'users:add_address' %}" method="post">
+	{% csrf_token %}
+	<table class="personalData_table">
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的名称：</td>
+			<td>
+				<input type="text"  name="recv_name"/>
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的电话：</td>
+			<td>
+				<input type="text"  name="recv_tel" />
+			</td>
+		</tr>
+		<!-- <tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的省份：</td>
+			<td>
+				<select id="pro"name="province" >
+					<option>--请选择省份--</option>
+				</select>
+				<select id="cit" name="city" >
+					<option>--请选择城市--</option>
+				</select>
+			</td>
+		</tr> -->
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的省份：</td>
+			<td>
+				<input type="text"  name="province" />
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的城市：</td>
+			<td>
+				<input type="text"  name="city" />
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的区县：</td>
+			<td>
+				<input type="text"  name="area" />
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">收货人的街道：</td>
+			<td>
+				<input type="text"  name="street" />
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">详细地址：</td>
+			<td>
+				<input type="text"  name="desc" />
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td class="tablel rows1_left">是否设为默认地址：</td>
+			<td>
+				<input type="checkbox"  name="is_default" value="true" />
+			</td>
+		</tr>
+		<tr class="personalData_rows1">
+			<td>
+				<input type="submit" value="添加地址"/>
+			</td>
+		</tr>
+		
+		
+	</table>
+	
+</form>
+{% endblock %}
+<link rel="stylesheet" type="text/css" href="/static/js/lib/jquery-2.1.4.js"/>
+<script>
+		var p = document.getElementById("pro")
+		var c = document.getElementById("cit")
+		var cityList = new Array();
+		cityList["北京市"] = ["朝阳区","东城区","西城区","海淀区","宣武区","丰台区","怀柔","延庆","房山"];
+		cityList["上海市"] = ["宝山区","长宁区","奉贤区","虹口区","黄埔区","青浦区","南汇区","徐汇区","卢湾区"];
+		cityList["广州省"] = ["广州市","汕头市","惠州市","珠海市","佛山市","中山市","东莞市"];
+		cityList["河南省"] = ["郑州市","周口市","开封市","商丘市","新乡市","安阳市","鹤壁市","濮阳市","焦作市",\
+							"洛阳市","三门峡市","平顶山市","许昌市","南阳市","信阳市","驻马店市","漯河市","济源市"];
+		for(var i in cityList){
+			p.add(new Option(i,i),null);
+		}
+		p.onchange = function(){
+			c.options.length = 0;
+			var pV = this.value;
+			for(var j in cityList){
+				if(pV == j){
+					for(var k = 0;k < cityList[j].length;k++){
+						// console.log(k)
+						c.add(new Option(cityList[j][k],cityList[j][k]),null);
+					}
+				}
+			}
+		}
+	</script>

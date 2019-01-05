@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的购物车-中酒网</title>
+		<link rel="shortcut icon" type="image/X-icon" href="/static/images/public/title_logo.png" />
+		<link rel="stylesheet" href="/static/css/style.css" />
+		<link rel="stylesheet" href="/static/css/mall.css" />
+		<link rel="stylesheet" href="/static/css/helpCenter.css" />
+		<link rel="stylesheet" href="/static/css/myShoppingCart.css" />
+		<!-- <script type="text/javascript" src="/static/js/lib/jquery-1.12.4.min.js" ></script> -->
+		<!-- <script type="text/javascript" src="/static/js/lib/style.js" ></script> -->
+		<!-- <script type="text/javascript" src="/static/js/lib/jquery.cookie.js" ></script> -->
+		<style type="text/css">
+			/* .tijao{
+				margin-top: 100px;
+				margin-left: 200px;
+			} */
+		</style>
+	</head>
+	<body>
+		<div id="top_warp" class="container">
+			<div id="top_center">
+				<p class="top_center_left">
+					<a href="" ><i></i>收藏网站</a>
+					<span>欢迎来到<a href="/" class="tit" title="中酒网">中酒网</a></span>
+				</p>
+				<p class="top_center_right">
+					[<a href="" class="">长剑腥腥挂壁</a>]
+					[<a href="{% url 'users:user_logout' %}" class="">退出</a>] |
+					<a href="" class="">我的订单</a> |
+					<a href="" class="">投诉直达</a> |
+					<a href="" class="">网站导航</a> |
+					订单热线：
+					<b>400-798-9999</b>
+				</p>
+			</div>
+			
+			<div id="logo_warp">
+				<h1>
+					<a href="/" title="中酒网"></a>
+				</h1>
+				<div class="logo_right"></div>
+			</div>
+			
+			<div id="cart_title">我的购物车</div>
+			
+			
+			
+			
+			
+			
+			
+			<div id="cart_head">
+				<span class="cart_head1">选购的商品</span>
+				<span class="cart_head2">单价（元）</span>
+				<span class="cart_head3">购买数量</span>
+				<span class="cart_head4">金额小计</span>
+				<span class="cart_head5">操作</span>
+			</div>
+			
+			<!--购物车商品-->
+			<form action="{% url 'orders:done' %}" method="post">
+				{% for sc in shopCarts %}
+				<div id="cart_warp" class="cart_warp">
+
+					<!--购物车第一件商品-->
+					
+					<div id="cartShop" class="cartShop">
+						
+							{% csrf_token %}
+							<table border="0" cellspacing="0" cellpadding="0">
+								<input type="hidden" name="c_id" value="{{sc.id}}" />
+								<tr>
+									<td><input type="checkbox" name="g_id"  value="{{s.id}}" /></td>
+									<td>
+										<div class="cartShop_img_warp">
+											<a href="" class="imglink">
+												<img src="/{{sc.goods.goodsimage_set.all.first.path}}" >
+											</a>
+										</div>
+										<div class="cartShop_name_warp">
+											<a href="" class="cartShop_name">
+												{{sc.goods.name}}<i>[商品名称]</i>
+											</a>
+										</div>
+									</td>
+									<td>
+										
+										<!-- 商品单价 -->
+										<div class="cartShop_price">
+											<p>{{sc.goods.price}}</p>
+										</div>
+									</td>
+									<td>
+										<!-- 商品数量 -->
+										<div class="cartShop_num">
+											<span>{{sc.count}}</span>
+											<!-- <a class="cutNum" href="javascript:;">-</a>
+											<input class="numValue" type="text" value="1" />
+											<a class="addNum" href="javascript:;">+</a> -->
+										</div>
+									</td>
+									<td>
+										<!-- 小计金额 -->
+										<div class="priceCount">{{sc.allTotal}}</div>
+									</td>
+									<td>
+										<div class="operation">
+					
+											<a class="remove" href="#">删除</a>
+										</div>
+									</td>
+								</tr>
+							</table>		
+					</div> 	
+				</div>
+				{% empty %}
+				当前没有商品
+				{% endfor %}
+				<div id="settleAccounts_warp">
+					<tr>
+						<th>收货人</th>
+						<th>电话号码</th>
+						<th>省份</th>
+						<th>城市</th>
+						<th>县区</th>
+						<th>街道</th>
+						<th>详细地址</th>
+						<th>是否默认地址</th><br>
+					</tr>
+					{% for address in addresses %}
+
+					<tr>
+						<td>{{address.recv_name}}</td>
+						<td>{{address.recv_tel}}</td>
+						<td>{{address.province}}</td>
+						<td>{{address.city}}</td>
+						<td>{{address.area}}</td>
+						<td>{{address.street}}</td>
+						<td>{{address.desc}}</td>
+						{% if address.is_default %}
+							<td><input type="radio" name="address" checked value="{{address.id}}" /></td>
+						{% else %}
+						<td><input type="radio" name="address"  value="{{address.id}}" /></td>
+						{% endif %}
+					</tr><br>
+					{% endfor %}
+					
+					
+				</div>
+				<div class="tijao"><input type="submit" value="提交订单"/></div>
+			</form>				
+		</div>
+		
+		<!--下面的div无故上浮 不知何故 清除浮动 无效 放一个浮动div将上下分隔开-->
+		<!-- <div style="accelerator: 1px;width: 100%;clear:both;height: 90px;"></div> -->
+		
+		<div id="recommend_warp">
+
+			
+			<div class="left_btn"></div>
+			
+			<ul class="recommend_list">
+				<li></li>
+			</ul>
+			
+			<div class="right_btn"></div>
+		</div>
+		
+		<!--底部-->
+		<div id="help_footer">
+			<ul id="help_QS">
+				<li>
+					<i class="help_QS1"></i>
+					<h4>品质保障</h4>
+					<p>厂家直供 真品防伪</p>
+				</li>
+				<li>
+					<i class="help_QS2"></i>
+					<h4>酒类O2O</h4>
+					<p>线上线下标准化</p>
+				</li>
+				<li>
+					<i class="help_QS3"></i>
+					<h4>7天无理由退货</h4>
+					<p>拆封无条件退货</p>
+				</li>
+				<li>
+					<i class="help_QS4"></i>
+					<h4>快速安全</h4>
+					<p>专业配送 安全送达</p>
+				</li>
+				<li>
+					<i class="help_QS5"></i>
+					<h4>百万口碑</h4>
+					<p>400万用户的认可</p>
+				</li>
+				<li class="last_li">
+					<i class="help_QS6"></i>
+					<h4>特色服务</h4>
+					<p>7*12小时的贴心服务</p>
+				</li>
+			</ul>
+			
+			<div id="bottom_line"></div>
+			
+			<div id="footer_nav_up_warp">
+				<div id="footer_nav_up_left">
+					<dl>
+						<dt class="left_icon1">购物指南</dt>
+						<dd>
+							<a href="">购物流程</a>
+							<a href="">常见问题</a>
+							<a href="">帮助中心</a>
+							<a href="">会员协议</a>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt class="left_icon2">购物配送</dt>
+						<dd>
+							<a href="">99免运费</a>
+							<a href="">配送说明</a>
+							<a href="">快递查询</a>
+							<a href="">验货与签收</a>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt class="left_icon3">支付方式</dt>
+						<dd>
+							<a href="">货到付款</a>
+							<a href="">支付宝 银联 信用卡</a>
+							<a href="">在线支付9.9折</a>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt class="left_icon4">售后服务</dt>
+						<dd>
+							<a href="">服务承诺</a>
+							<a href="">退款说明</a>
+							<a href="">退换货政策</a>
+							<a href="">退换货流程</a>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt class="left_icon5">服务保障</dt>
+						<dd>
+							<a href="">真品防伪，四码合一</a>
+							<a href="">7天无条件退货</a>
+							<a href="">7*12小时贴心服务</a>
+							<a href="">30分钟快速响应</a>
+						</dd>
+					</dl>
+				</div>
+				
+				<div id="footer_nav_up_right">
+					<div>
+						<h3>手机中酒</h3>
+						<img src="/static/images/login/zj_phone.png" />
+						<h4>下载移动客户端</h4>
+					</div>
+					
+					<div>
+						<h3>手机中酒</h3>
+						<img src="/static/images/login/zj_wx.png" />
+						<h4>中酒官方微信</h4>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div id="link_warp">		
+				<a class="link" href="">关于中酒</a>
+				<a href="">媒体报道</a>
+				<a href="">商务合作</a>
+				<a href="">品牌入驻</a>
+				<a href="">加入中酒</a>
+				<a href="">商家加盟</a>
+				<a href="">联系我们</a>
+			</div>
+			
+			<p id="Copyright">Copyright © 2016 中酒网(www.zhongjiu.cn) 版权所有 京ICP备12022216号-2  | 京公网安备 11010502026701</p>
+			<p id="contactAddress"><span>购买前请确认达到法定饮酒年龄！</span>中酒网不销售任何含酒精产品给18岁以下人士！</p>
+			<div id="safetyWebsite">
+				<a href=""></a>
+				<a href=""></a>
+				<a href=""></a>
+				<a href=""></a>
+				<a href=""></a>
+			</div>
+			
+		</div>
+		
+		
+		
+	</body>
+</html>

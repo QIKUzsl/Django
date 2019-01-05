@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ajax</title>
+	</head>
+	<body>
+		<h1>ajax测试</h1>
+		<button id="user" type="button">测试</button>
+		<script src="/static/user/js/jquery-2.1.4.min.js"></script>
+		<script>
+			$("#user").on("click",function(){
+				$.ajax({
+					url:'/user/text/',
+					type:'POST',
+					dataType:'JSON',
+					success:function(data){
+						alert(data[1]['fields']['username'])
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

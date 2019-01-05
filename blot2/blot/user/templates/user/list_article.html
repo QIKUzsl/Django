@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<table border="" cellspacing="" cellpadding="">
+			<tr>
+				<td>文章编号</td>
+				<td>文章名</td>
+				<td>内容</td>
+				<td>作者编号</td>
+			</tr>
+			{% for a in article %}
+			<tr>
+				<td>{{a.id}}</td>
+				<td>{{a.title}}</td>
+				<td>{{a.content}}</td>
+				<td>{{a.user_id}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<a href="{% url 'user:home' %}"><button type="button">返回首页</button></a>
+	</body>
+</html>

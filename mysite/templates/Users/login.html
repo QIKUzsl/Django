@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录-中酒网</title>
+		<link rel="shortcut icon" type="image/X-icon" href="../../static/images/public/title_logo.png" />
+		<link rel="stylesheet" href="../../static/css/style.css" />
+		<link rel="stylesheet" href="../../static/css/login.css" />
+		<script type="text/javascript" src="../../static/js/lib/jquery-1.12.4.min.js" ></script>
+		<script type="text/javascript" src="../../static/js/lib/jquery.validate.js" ></script>
+		<script type="text/javascript" src="../../static/js/lib/form.js" ></script>
+		
+		
+		
+	</head>
+	<body>
+		<div id="login_top">
+			<ul class="login_top_left">
+				<li class="login_top_left1"><a href="#"></a></li>
+				<li class="login_top_left2">登录</li>
+			</ul>
+			
+			<ul class="login_top_right">
+				<li class="login_top_right1">100%正品</li>
+				<li class="login_top_right2">一时达</li>
+				<li class="login_top_right3">金牌客服</li>
+			</ul>
+		</div>
+		
+		<div id="login_center">
+			<div class="login_center_left">
+				<a href=""><img src="../../static/images/login/0901denglutu.jpg" /></a>
+			</div>
+			
+			<div class="login_center_right">
+				<form id="login_form" name="" action="{% url 'Users:login' %}" method="post">
+					{% csrf_token %}
+                    <!--账号输入框-->
+{#					<div id="input_cell">#}
+{#						<!--<label id="account_label" for="account">邮箱/手机号/用户名</label>-->#}
+{#						<input class="username" id="account" type="text" placeholder="请输入手机号" />#}
+{#						<span id="account_ok" class="ok"></span>#}
+{#						<div id="account_error" class="error_text">#}
+{#							<span class="error_V"></span>#}
+{#							<span class="error_Prompt">键盘大写锁定已打开，请注意大小写</span>#}
+{#						</div>#}
+{#					</div>#}
+
+                    <!--用户名输入框-->
+                    <div id="input_cell">
+						<!--<label id="pasword_label" for="passWord">请输入密码</label>-->
+						<input name="username" id="username" type="text" placeholder="请输入用户名"  />
+						<span id="passWord_ok" class="ok"></span>
+						<div id="passWord_error" class="error_text">
+							<span class="error_V"></span>
+							<span class="error_Prompt">键盘大写锁定已打开，请注意大小写</span>
+						</div>
+					</div>
+
+
+					<!--密码输入框-->
+					<div id="input_cell">
+						<!--<label id="pasword_label" for="passWord">请输入密码</label>-->
+						<input name="password" id="passWord" type="password" placeholder="请输入密码" />
+						<span id="passWord_ok" class="ok"></span>
+						<div id="passWord_error" class="error_text">
+							<span class="error_V"></span>
+							<span class="error_Prompt">键盘大写锁定已打开，请注意大小写</span>
+						</div>
+					</div>
+					
+					<!--验证码输入框-->
+{#					<div id="input_cell">#}
+{#						<!--<label id="verification_label" for="verification">请输入验证码</label>-->#}
+{#						<input name="verificationCode" id="verification" type="text" placeholder="请输入验证码" />#}
+{#						<span id="verification_ok" class="ok"></span>#}
+{#						<div id="verification_error" class="error_text">#}
+{#							<span class="error_V"></span>#}
+{#							<span class="error_Prompt">键盘大写锁定已打开，请注意大小写</span>#}
+{#						</div>#}
+{#						#}
+{#						<div id="img_code">#}
+{#							<img src="../images/login/yanZhengCodeNew1.ashx.png">#}
+{#						</div>#}
+{#						<a class="changeImg" href="javascript:;">看不清？换一张</a>#}
+{#					</div>#}
+					
+					<!--记住用户名-->
+					<div id="remember">
+						<span class="remember_account">记住用户名</span>
+						<a class="forget_password" href="">忘记密码？</a>
+					</div>
+					
+					<!--登录-->
+					<div id="login_cell">
+						<input class="login_btn" type="submit" value="登录" />
+						<a href="{% url 'Users:register' %}" class="register_link">30秒注册»</a>
+					</div>
+				</form>
+				
+				<p id="otherWays">使用合作网站账号登录：</p>
+				<a href="" class="way_weibo"></a>
+				<a href="" class="way_QQ"></a>
+				<a href="" class="way_zhi"></a>
+			</div>
+		</div>
+		
+		<div id="login_bottom">
+			<p>			
+				Copyright © 2016 中酒网(www.zhongjiu.cn) 版权所有
+				<a href="" target="_blank">京ICP备12022216号-2</a>
+			</p>
+			<p>购买前请确认达到法定饮酒年龄！中酒网不销售任何含酒精产品给18岁以下人士！</p>
+		</div>
+		
+	</body>
+</html>

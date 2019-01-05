@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<form action="{% url 'user:register' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		用户名<input type="text" name="username" id="username" value="" /><br>
+		密码<input type="password" name="passwd" id="passwd" value="" /><br>
+		头像<input type="file" name="header" id="header" value="" /><br>
+		<input type="submit" name="" id="" value="注册" />
+	</form>
+	<a href="{% url 'user:home' %}"><button type="button">返回首页</button></a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {#<h1>这是项目首页</h1>#}
+    {%comment%}
+    这是多行注释
+    {%endcomment%}
+    <!--html注释方式-->
+    {% load static %}
+    <img style="width: 100px;height: 100px;" src="/static/img/op.jpg" alt="">
+    <img style="width: 100px;height: 100px;" src="{% static 'img/op.jpg' %}" alt="">
+    <!--<h1>{{name}}</h1>-->
+    <h1>{{user.name}}</h1>
+    <h1>{{user.age}}</h1>
+    {% if user.age >= 20 %}
+    好的
+    {% elif user.age == 19 %}
+    那好吧
+    {% else %}
+    不可以
+    {% endif %}
+    {% for u in users %}
+        {{u.name}}
+        {{u.age}}<br>
+    {% empty %}
+        <p>不好意思，没有数据</p>
+    {% endfor %}
+    <form action="{% url 'user:login' %}" method="post">
+        {% csrf_token %}
+        用户名<input type="text" name="username" id="username" value="" />
+        密码<input type="password" name="password" id="password" value="" />
+        <input type="submit" name="" id="" value="注册" />
+    </form>
+</body>
+</html>

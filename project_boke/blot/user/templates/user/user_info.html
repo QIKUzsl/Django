@@ -1,0 +1,30 @@
+{% extends 'user/base.html' %}
+{% block title %}
+用户信息
+{% endblock %}
+
+{% block content-right %}
+<div class="col-md-9">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">主要信息</h3>
+		</div>
+		<div class="panel-body" style="min-height: 400px;">
+			<table border="" cellspacing="" cellpadding="">
+				<tr>
+					<td>用户id</td>
+					<td>{{request.session.loginUser.id}}</td>
+				</tr>
+				<tr>
+					<td>用户名</td>
+					<td>{{request.session.loginUser.name}}</td>
+				</tr>
+				<tr>
+					<td>用户密码</td>
+					<td>{{request.session.loginUser.passwd}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

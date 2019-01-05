@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<script src="/static/tiny_mce/tiny_mce.js" ></script>
+</head>
+<body>
+    <form action="{% url 'user:addArcticle' %}" method="POST">
+		{% csrf_token %}
+		{{msg}}
+		标题<input type="text" name="title" value=""  />
+
+		<textarea name="content" rows="20" cols="10">
+			
+		</textarea>
+		<input type="submit" value="提交"/>
+		<input type="text" name="user_id" value=""  placeholder="请输入作者编号"/>
+    </form>
+	<script>
+		tinyMCE.init({
+			'mode':'textareas',
+			'theme':'advanced',
+			'forced_root_block':'',
+			'width':200,
+			'height':100,
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<form action="{% url 'user:updateUser' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="sid" value="{{user.id}}" />
+			用户名<input type="text" name="username" id="name" value="{{user.username}}" />
+			密码<input type="password" name="passwd" id="passwd" value="{{user.passwd}}" />
+			<input type="submit" name="" id="" value="请修改" />
+		</form>
+		<a href="{% url 'user:home' %}"><button type="button">返回首页</button></a>
+	</body>
+</html>
